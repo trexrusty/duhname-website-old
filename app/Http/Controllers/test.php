@@ -25,6 +25,7 @@ class test extends Controller
         // Convert to base64
         $base64Image = base64_encode($imageData);
 
+
         // Create the data URI
         $dataUri = 'data:image/png;base64,' . $base64Image;
 
