@@ -11,7 +11,7 @@ class SessionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class SessionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+            'cf-turnstile-response' => 'required|string',
         ];
     }
 

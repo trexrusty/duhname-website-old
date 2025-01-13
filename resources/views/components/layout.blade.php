@@ -10,23 +10,24 @@
 </head>
 <body class="bg-slate-800">
     <nav class="bg-gray-800 p-4">
-        <ul class="flex space-x-4">
-            <li><a href="{{ route('home') }}" class="text-white hover:text-gray-300">Home</a></li>
+        <div class="flex justify-center space-x-4 items-center">
+            <a href="{{ route('home') }}" class="text-white hover:text-gray-300">Home</a>
             @if (auth()->check())
-                <li>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-white hover:text-red-300">
-                            Logout
-                        </button>
-                    </form>
-                </li>
+                <img src="{{ auth()->user()->icon_url ?? 'http://localhost:9000/local/user_icons/' . auth()->user()->id . '.png' }}"
+                     alt="User icon"
+                     class="w-8 h-8 rounded-full">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-white hover:text-red-300">
+                        Logout
+                    </button>
+                </form>
             @else
-                <li><a href="{{ route('login') }}" class="text-white hover:text-gray-300">Login</a></li>
-                <li><a href="{{ route('register') }}" class="text-white hover:text-gray-300">Register</a></li>
+                <a href="{{ route('login') }}" class="text-white hover:text-gray-300">Login</a>
+                <a href="{{ route('register') }}" class="text-white hover:text-gray-300">Register</a>
             @endif
-        </ul>
+        </div>
     </nav>
     {{$slot}}
 </body>
