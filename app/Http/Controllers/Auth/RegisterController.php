@@ -10,6 +10,11 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 class RegisterController extends Controller
 {
+    public function registerview()
+    {
+        return view('auth.register');
+    }
+
     public function register(RegisterRequest $request)
     {
         $user = User::create([

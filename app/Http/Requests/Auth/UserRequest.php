@@ -25,4 +25,12 @@ class UserRequest extends FormRequest
             //
         ];
     }
+
+    public function validated($key = null, $default = null): array
+    {
+        $validated = parent::validated();
+        unset($validated['cf-turnstile-response']);
+
+        return $validated;
+    }
 }

@@ -11,20 +11,7 @@ class test extends Controller
 {
     public function view()
     {
-        if (!Auth::check()) {
-            return redirect()->route('register');
-        }
-        $user = User::find(Auth::user()->id);
-        $iconUrl = Storage::get('user_icons/' . $user->id . '.png');
-
-        $base64Image = base64_encode($iconUrl);
-
-
-        // Create the data URI
-        $iconUrl = 'data:image/png;base64,' . $base64Image;
-        return view('welcome', [
-            'iconUrl' => $iconUrl
-        ]);
+        return view('welcome');
     }
 
     public function icon(Request $request)

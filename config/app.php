@@ -15,6 +15,11 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'captcha' => [
+        'site_key' => env('CAPTCHA_SITE_KEY'),
+        'secret_key' => env('CAPTCHA_SECRET_KEY'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
