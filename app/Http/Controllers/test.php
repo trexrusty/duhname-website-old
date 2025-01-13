@@ -47,4 +47,15 @@ class test extends Controller
             'imageData' => $dataUri
         ]);
     }
+
+    public function saveIconToS3(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        $seed = $request->input('seed');
+        $response = Http::get('http://host.docker.internal:3000/9.x/pixel-art/png?seed=' . $seed);
+        $imageData = $response->body();
+        Storage::put('user_icons/' . $user->id . '.png', $imageData);
+
+        return redirect('/')->with('success', 'Icon saved successfully!');
+    }
 }

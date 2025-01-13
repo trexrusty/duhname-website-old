@@ -11,3 +11,5 @@ Route::get('/register', function () {
 })->name('register');
 
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
+
+Route::post('/save-icon', [test::class, 'saveIconToS3'])->name('saveIcon');
