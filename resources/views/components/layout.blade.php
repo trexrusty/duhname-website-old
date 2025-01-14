@@ -8,9 +8,9 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 </head>
-<body class="bg-slate-800">
-    <nav class="bg-gray-800 p-4">
-        <div class="flex justify-center space-x-4 items-center">
+<body class="bg-secondary text-white">
+    <nav class="bg-secondary p-4 flex justify-center items-center">
+        <div class="flex space-x-4 items-center">
             <a href="{{ route('home') }}" class="text-white hover:text-gray-300">Home</a>
             @if (auth()->check())
                 <img src="{{ auth()->user()->icon_url ?? 'http://localhost:9000/local/user_icons/' . auth()->user()->id . '.png' }}"
