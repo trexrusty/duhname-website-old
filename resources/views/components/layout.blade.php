@@ -8,8 +8,8 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 </head>
-<body class="bg-secondary text-white">
-    <nav class="bg-secondary p-4 flex justify-center items-center">
+<body class="bg-primary text-white">
+    <nav class="bg-primary p-4 flex justify-center items-center">
         <div class="flex space-x-4 items-center">
             <a href="{{ route('home') }}" class="text-white hover:text-gray-300">Home</a>
             @if (auth()->check())

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\IndexController;
-
+use App\Http\Controllers\Social\PostController;
 // Guest routes
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [RegisterController::class, 'registerview'])->name('register');
@@ -17,7 +17,7 @@ Route::group(['middleware' => 'guest'], function () {
 
 // Authenticated routes
 Route::group(['middleware' => 'auth'], function () {
-
+    Route::post('/post', [PostController::class, 'store'])->name('post.store');
 
     Route::delete('/logout', [SessionController::class, 'logout'])->name('logout');
 

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Social;
 
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
+use App\Http\Requests\Social\Store\StorePostRequest;
+use App\Http\Requests\Social\Update\UpdatePostRequest;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     /**
@@ -29,7 +30,14 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        Post::create([
+            'content' => $validated['content'],
+            'owner_id' => Auth::id(),
+            'community_id' => $validated['community_id'] ?? null,
+        ]);
+        return redirect()->route('home');
     }
 
     /**
