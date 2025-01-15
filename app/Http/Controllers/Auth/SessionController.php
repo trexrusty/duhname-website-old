@@ -17,11 +17,13 @@ class SessionController extends Controller
 
     public function login(SessionRequest $request)
     {
-        $user = User::where('email', $request->email)->first();
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
+        $credential = $request->validated();
+
+        if (!Auth::attempt($credential)) {
+            return back()->withErrors(['email' => 'Invalid credentials']);
         }
-        Auth::login($user);
+
+        $request->session()->regenerate();
         return redirect()->route('home');
     }
 
