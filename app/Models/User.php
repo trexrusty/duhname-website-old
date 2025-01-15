@@ -64,6 +64,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class, 'owner_id');
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'user_id');
+    }
+
     public function communities()
     {
         return $this->belongsToMany(Community::class, 'community_user', 'user_id', 'community_id');
@@ -74,4 +79,13 @@ class User extends Authenticatable
         return $this->hasMany(Community::class, 'owner_id');
     }
 
+    public function hasLikedPost(Post $post)
+    {
+        return $this->likes()->where('post_id', $post->id)->exists();
+    }
+
+    public function hasLikedComment(Comment $comment)
+    {
+        return $this->likes()->where('comment_id', $comment->id)->exists();
+    }
 }

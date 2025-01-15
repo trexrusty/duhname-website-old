@@ -9,9 +9,16 @@ use App\Models\Post;
 use Illuminate\Pagination\Paginator;
 class IndexController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with('owner')->orderBy('created_at', 'desc')->paginate(10);
+        $posts = Post::with('owner', 'likes')->latest()->paginate(5);
+
+        if ($request->hasHeader('hx-request')) {
+            return view('post.index', compact('posts'))->render();
+        }
+
         return view('index', compact('posts'));
     }
+
+
 }

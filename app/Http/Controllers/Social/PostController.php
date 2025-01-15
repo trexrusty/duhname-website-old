@@ -7,6 +7,7 @@ use App\Http\Requests\Social\Update\UpdatePostRequest;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 class PostController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -71,4 +72,5 @@ class PostController extends Controller
     {
         //
     }
+
 }
