@@ -17,9 +17,9 @@ Route::group(['middleware' => 'guest'], function () {
 
 // Authenticated routes
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [IndexController::class, 'index'])->name('home');
 
 
     Route::delete('/logout', [SessionController::class, 'logout'])->name('logout');
 
 });
+Route::get('/', [IndexController::class, 'index'])->name('home');
