@@ -7,6 +7,7 @@
     <title>Document</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+
 </head>
 <body class="bg-primary text-white">
     <nav class="bg-primary p-4 flex justify-center items-center">

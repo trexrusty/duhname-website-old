@@ -13,9 +13,15 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $posts = Post::with('owner')->latest()->paginate(5);
 
+        if ($request->hasHeader('hx-request')) {
+            return view('post.index', compact('posts'));
+        }
+
+        return redirect()->route('home');
     }
 
     /**
@@ -38,6 +44,9 @@ class PostController extends Controller
             'owner_id' => Auth::id(),
             'community_id' => $validated['community_id'] ?? null,
         ]);
+        if ($request->hasHeader('hx-request')) {
+            return redirect()->route('post.index');
+        }
         return redirect()->route('home');
     }
 

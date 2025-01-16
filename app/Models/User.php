@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Spatie\Permission\Traits\HasRoles;
-
+use Illuminate\Support\Facades\Storage;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -18,6 +18,12 @@ class User extends Authenticatable
     public $incrementing = false;
 
     public $icon_url;
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            $user->assignRole('Verified');
+        });
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -52,6 +58,16 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getIconUrlAttribute()
+    {
+        return $this->icon ? Storage::url($this->icon) : null;
+    }
+
+    public function is_verified()
+    {
+        return $this->hasRole('Verified');
     }
 
     public function posts()

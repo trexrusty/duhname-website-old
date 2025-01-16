@@ -12,6 +12,8 @@ export default {
           'secondary': '#121212',
           'tertiary': '#242424',
           'quaternary': '#363636',
+          'verified': '#39f566',
+          'bugfinder': '#fdba14',
         },
       },
     },

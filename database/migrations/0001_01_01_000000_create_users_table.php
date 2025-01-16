@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('icon_url')->nullable();
             $table->boolean('is_verified')->default(false);
+            $table->boolean('is_bugfinder')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

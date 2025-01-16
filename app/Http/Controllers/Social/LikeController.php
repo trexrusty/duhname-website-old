@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
+use App\Notifications\PostLiked;
+
 class LikeController extends Controller
 {
     /**
@@ -31,21 +33,8 @@ class LikeController extends Controller
      */
     public function post_like(Post $post)
     {
-
         $user = Auth::user();
-
-        if($user->hasLikedPost($post))
-        {
-            $user->likes()->where('post_id', $post->id)->delete();
-        }
-        else
-        {
-            Like::create([
-                'post_id' => $post->id,
-                'user_id' => $user->id,
-            ]);
-        }
-
+        $post->toggleLike($user);
 
         return view('post.post', compact('post'));
     }
@@ -65,6 +54,7 @@ class LikeController extends Controller
                 'comment_id' => $comment->id,
                 'user_id' => $user->id,
             ]);
+
         }
 
         return redirect()->back();

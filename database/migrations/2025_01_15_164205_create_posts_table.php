@@ -16,6 +16,10 @@ return new class extends Migration
             $table->text('content');
             $table->foreignUuid('owner_id')->constrained('users');
             $table->foreignUuid('community_id')->nullable()->constrained('communities');
+            $table->integer('likes_count')->default(0);
+            $table->integer('comments_count')->default(0);
+            $table->integer('views_count')->default(0);
+            $table->foreignUuid('parent_id')->nullable()->constrained('posts');
             $table->timestamps();
         });
     }
