@@ -13,7 +13,7 @@
         </div>
     </div>
     <p class="whitespace-normal break-words">{{ Str::limit($post->content, 75) }}</p>
-    <form class="flex items-center justify-end" hx-post="{{ route('like.post', $post->id) }}" hx-target="#post-{{ $post->id }}" hx-swap="outerHTML">
+    <form class="flex items-center justify-end" hx-post="{{ route('like.post', $post->id) }}" hx-target="#post-{{ $post->id }}" hx-swap="outerHTML" hx-on::after-request="if(event.detail.xhr.status === 401) { window.location.href = '{{ route('login') }}' }">
         @csrf
         <p class="text-sm">{{ $post->likes_count }}</p>
         <button type="submit" class="flex items-right">
